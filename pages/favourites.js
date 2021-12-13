@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MongoClient } from "mongodb";
 import LinkButton from "../components/buttons/linkButton";
 import { ButtonSplit } from "../components/buttons/styles";
@@ -6,18 +7,25 @@ import Gallery from "../components/gallery";
 
 export default function Breeds({ favourites }) {
 	const favouriteIds = favourites.map((fav) => fav.id);
+	const [images, setImages] = useState(favourites);
 	return (
 		<>
 			<h1>
 				Here are some favourites{" "}
 				<span className="material-icons-outlined">favorite</span>
 			</h1>
-			{favouriteIds.length > 0 ? (
+			{images.length > 0 ? (
 				<Gallery
 					label="A favourite"
-					images={favourites}
+					images={images}
 					favourites={favouriteIds}
-					onFavourite={(id) => removeFavourite(id)}
+					onFavourite={(id) => {
+						const updatedImages = [...images].filter(
+							(img) => img.id !== id
+						);
+						removeFavourite(id);
+						setImages(updatedImages);
+					}}
 				/>
 			) : (
 				<EmptyMessage
@@ -84,15 +92,3 @@ export async function getStaticProps() {
 		revalidate: 3600,
 	};
 }
-
-// export async function getServerSideProps(context) {
-// 	const req = context.req;
-// 	const res = context.res;
-
-// 	// fetch data from API
-// 	return {
-// 		props: {
-// 			breeds: dummyBreeds,
-// 		},
-// 	};
-// }

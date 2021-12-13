@@ -1,16 +1,23 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import IconButton from "../buttons/iconButton";
 import { StyledGallery, StyledGalleryItem } from "./styles";
 
 function GalleryItem({ id, src, color, isFavourite, onFavourite }) {
-	// console.log(id, isFavourite);
-
-	const favouriteIcon = isFavourite ? "favorite" : "favorite_border";
+	const [favourite, setFavourite] = useState(isFavourite);
+	const favouriteIcon = favourite ? "favorite" : "favorite_border";
 
 	return (
-		<StyledGalleryItem $src={src} $active={isFavourite} $color={color}>
+		<StyledGalleryItem $src={src} $active={favourite} $color={color}>
 			<div></div>
-			<IconButton icon={favouriteIcon} onClick={() => onFavourite(id)} />
+			<IconButton
+				icon={favouriteIcon}
+				onClick={() => {
+					const action = favourite ? "remove" : "add";
+					onFavourite(id, action);
+					setFavourite(!favourite);
+				}}
+			/>
 		</StyledGalleryItem>
 	);
 }
@@ -36,7 +43,7 @@ export default function Gallery({
 						alt={label}
 						color={color}
 						isFavourite={isFavourite}
-						onFavourite={(id) => onFavourite(id)}
+						onFavourite={(id, action) => onFavourite(id, action)}
 					/>
 				);
 			})}

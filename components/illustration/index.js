@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { switchProp } from "styled-tools";
 
-const StyledImageWrapper = styled.div`
+export const StyledImageWrapper = styled.div`
 	padding-bottom: ${switchProp("$size", {
 		normal: "146px",
 		large: "206px",

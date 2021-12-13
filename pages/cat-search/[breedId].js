@@ -9,12 +9,14 @@ export default function SearchBreed({
 }) {
 	const favouriteIds = favourites.map((fav) => fav.id);
 
-	const handleFavourite = (imageId) => {
+	const handleFavourite = (imageId, action) => {
 		const isFavourite =
 			favouriteIds.filter((favId) => favId === imageId).length > 0;
-		if (isFavourite) {
+		if (isFavourite && action === "remove") {
 			removeFavourite(imageId);
-		} else {
+			return;
+		}
+		if (!isFavourite && action === "add") {
 			const favouriteImg = images.filter((image) => image.id === imageId);
 			addFavourite({
 				id: imageId,
@@ -34,7 +36,7 @@ export default function SearchBreed({
 				label={`${name} breed`}
 				images={images}
 				favourites={favouriteIds}
-				onFavourite={(id) => handleFavourite(id)}
+				onFavourite={(id, action) => handleFavourite(id, action)}
 			/>
 			<LinkButton path="/breeds" variant="outlined">
 				All Breeds

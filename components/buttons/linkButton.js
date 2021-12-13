@@ -1,12 +1,22 @@
+import { useState } from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
+import Loader from "../loader";
 import { StyledButton } from "./styles";
 
 export default function LinkButton({ path, children, color, variant }) {
+	const [showLoader, setShowLoader] = useState(false);
 	return (
-		<StyledButton $variant={variant} $color={color}>
-			<Link href={path}>{children}</Link>
-		</StyledButton>
+		<>
+			<StyledButton
+				$variant={variant}
+				$color={color}
+				onClick={() => setShowLoader(true)}
+			>
+				<Link href={path}>{children}</Link>
+			</StyledButton>
+			{showLoader && <Loader />}
+		</>
 	);
 }
 

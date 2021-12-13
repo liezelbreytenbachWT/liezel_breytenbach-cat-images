@@ -12,6 +12,15 @@ const GlobalStyle = createGlobalStyle`
       transform: scale(1);
     }
   }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
   html,
   body {
