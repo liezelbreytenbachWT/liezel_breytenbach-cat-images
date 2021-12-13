@@ -1,6 +1,18 @@
 import { createGlobalStyle, css } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
+  @keyframes pop {
+    0% {
+      transform: scale(0);
+    }
+    75% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   html,
   body {
     padding: 0;
@@ -10,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     padding: 30px 8vw;
+    color: ${({ theme }) => theme.colour.black};
   }
   
   a {
@@ -22,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
   }
   
   p {
-    color: ${({ theme }) => theme.colour.text.light};
+    color: ${({ theme }) => theme.colour.text.main};
     line-height: 1.6;
   }
 
@@ -44,7 +57,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
-    font-size: 24px;  /* Preferred icon size */
+    font-size: 24px;
     display: inline-block;
     line-height: 1;
     text-transform: none;
@@ -52,13 +65,9 @@ const GlobalStyle = createGlobalStyle`
     word-wrap: normal;
     white-space: nowrap;
     direction: ltr;
-    /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
-    /* Support for Safari and Chrome. */
     text-rendering: optimizeLegibility;
-    /* Support for Firefox. */
     -moz-osx-font-smoothing: grayscale;
-    /* Support for IE. */
     font-feature-settings: 'liga';
   }
 

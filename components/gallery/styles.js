@@ -25,12 +25,17 @@ export const StyledGalleryItem = styled.div`
 		background-size: cover;
 		background-repeat: no-repeat;
 	}
+	[class*="material-icons"] {
+		padding-top: 2px;
+	}
 	${StyledIconButton} {
 		position: absolute;
 		bottom: 5%;
 		right: 5%;
 		color: ${({ theme }) => theme.colour.white};
 		text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+		transform: scale(0);
+		animation: pop 0.3s 0.3s forwards;
 		&:hover {
 			background-color: ${({ theme }) => theme.colour.whiteOp};
 			color: ${({ theme, $color }) => theme.colour[$color].main};

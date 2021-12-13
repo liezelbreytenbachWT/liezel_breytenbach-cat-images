@@ -1,9 +1,33 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { switchProp, ifProp, ifNotProp } from "styled-tools";
 import { gradient } from "../../styles/globals";
 
 const big = "44px";
 const small = "40px";
+
+const bubble = css`
+	height: ${big};
+	border-radius: ${`calc(${big} / 2)`};
+	display: flex;
+	align-items: center;
+	span {
+		font-size: 1.7rem;
+		display: block;
+	}
+`;
+
+const gradientOverlay = css`
+	position: relative;
+	z-index: 1;
+	&:before {
+		background-color: ${({ theme }) => theme.colour.white};
+		border-radius: inherit;
+		display: block;
+		position: absolute;
+		z-index: -1;
+		content: "";
+	}
+`;
 
 export const StyledButton = styled.div`
 	a {
@@ -12,7 +36,7 @@ export const StyledButton = styled.div`
 				"$variant",
 				{
 					outlined: theme.colour[$color].main,
-					list: theme.colour.text.light,
+					list: theme.colour.text.dark,
 				},
 				theme.colour.white
 			)};
@@ -58,15 +82,55 @@ export const StyledButton = styled.div`
 `;
 
 export const StyledIconButton = styled.button`
+	${bubble}
 	width: ${big};
-	height: ${big};
-	border-radius: 100%;
-	display: flex;
 	justify-content: center;
-	align-items: center;
-	span {
-		font-size: 1.7rem;
-		display: block;
+`;
+
+export const StyledBubbleLabel = styled.div`
+	color: ${({ theme }) => theme.colour.black};
+	font-weight: bold;
+	max-width: 0;
+	opacity: 0;
+	padding-right: 0;
+	transition: all 0.3s, opacity 0.1s;
+`;
+
+export const StyledBubbleContent = styled.div`
+	${bubble}
+	${gradient}
+  ${gradientOverlay}
+	overflow: hidden;
+	justify-content: flex-start;
+	color: ${({ theme }) => theme.colour.primary.main};
+	&:before {
+		top: 1px;
+		bottom: 1px;
+		left: 1px;
+		right: 1px;
+	}
+	[class*="material-icons"] {
+		width: ${big};
+		text-align: center;
+	}
+`;
+
+export const StyledBubble = styled.div`
+	position: relative;
+	a {
+		font-size: 0;
+		z-index: 2;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		&:hover ~ ${StyledBubbleContent} ${StyledBubbleLabel} {
+			max-width: 200px;
+			opacity: 1;
+			padding-right: 14px;
+			transition: all 0.3s, opacity 0.1s 0.3s;
+		}
 	}
 `;
 
@@ -99,17 +163,12 @@ export const ButtonSplit = styled.div`
 			background-color: transparent;
 			position: relative;
 			z-index: 1;
+			${gradientOverlay}
 			&:before {
-				background-color: ${({ theme }) => theme.colour.white};
-				border-radius: inherit;
-				display: block;
-				position: absolute;
-				z-index: -1;
 				top: 0;
 				bottom: 0;
 				left: 0;
 				right: 0;
-				content: "";
 			}
 			&:hover:before {
 				top: -1px;

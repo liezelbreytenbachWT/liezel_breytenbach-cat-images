@@ -9,8 +9,6 @@ export default function SearchBreed({
 }) {
 	const favouriteIds = favourites.map((fav) => fav.id);
 
-	console.log(favouriteIds);
-
 	const handleFavourite = (imageId) => {
 		const isFavourite =
 			favouriteIds.filter((favId) => favId === imageId).length > 0;

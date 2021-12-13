@@ -47,15 +47,3 @@ export async function getStaticProps() {
 		revalidate: 3600,
 	};
 }
-
-// export async function getServerSideProps(context) {
-// 	const req = context.req;
-// 	const res = context.res;
-
-// 	// fetch data from API
-// 	return {
-// 		props: {
-// 			breeds: dummyBreeds,
-// 		},
-// 	};
-// }
