@@ -3,13 +3,19 @@ import LinkButton from "../components/buttons/linkButton";
 import Gallery from "../components/gallery";
 
 export default function Breeds({ favourites }) {
+	const favouriteIds = favourites.map((fav) => fav.id);
 	return (
 		<>
 			<h1>
 				Here are some favourites{" "}
 				<span className="material-icons-outlined">favorite</span>
 			</h1>
-			<Gallery label="A favourite" images={favourites} />
+			<Gallery
+				label="A favourite"
+				images={favourites}
+				favourites={favouriteIds}
+				onFavourite={(id) => removeFavourite(id)}
+			/>
 			<LinkButton path="/" variant="outlined">
 				Go Home
 			</LinkButton>
@@ -26,8 +32,17 @@ export async function addFavourite(favourite) {
 		},
 	});
 	const data = await response.json();
+}
 
-	console.log(data);
+export async function removeFavourite(favouriteId) {
+	const response = await fetch("/api/favourites", {
+		method: "DELETE",
+		body: JSON.stringify({ id: favouriteId }),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+	const data = await response.json();
 }
 
 export async function getStaticProps() {
@@ -38,8 +53,6 @@ export async function getStaticProps() {
 	const favouritesCollection = db.collection("favourites");
 
 	const data = await favouritesCollection.find().toArray();
-
-	console.log(data);
 
 	client.close();
 
