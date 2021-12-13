@@ -95,6 +95,9 @@ export const StyledBubbleLabel = styled.div`
 	opacity: 0;
 	padding-right: 0;
 	transition: all 0.3s, opacity 0.1s;
+	@media (hover: none) {
+		display: none;
+	}
 `;
 
 export const StyledBubbleContent = styled.div`

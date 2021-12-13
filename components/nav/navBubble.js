@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import BubbleButton from "../buttons/bubbleButton";
 
@@ -13,14 +14,20 @@ const StyledNavBubble = styled.div`
 	}
 `;
 
-export default function NavBubble() {
+export default function NavBubble({ path, label, icon }) {
 	return (
 		<StyledNavBubble>
-			<BubbleButton
-				path="/favourites"
-				icon="favorite"
-				label="Favourites"
-			/>
+			<BubbleButton path={path} icon={icon} label={label} />
 		</StyledNavBubble>
 	);
 }
+
+NavBubble.propTypes = {
+	path: PropTypes.string,
+	label: PropTypes.string,
+	icon: PropTypes.string,
+};
+
+NavBubble.defaultProps = {
+	size: "normal",
+};
