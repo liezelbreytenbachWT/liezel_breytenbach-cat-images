@@ -90,6 +90,7 @@ export const StyledIconButton = styled.button`
 export const StyledBubbleLabel = styled.div`
 	color: ${({ theme }) => theme.colour.black};
 	font-weight: bold;
+	letter-spacing: 0.02rem;
 	max-width: 0;
 	opacity: 0;
 	padding-right: 0;
@@ -136,7 +137,7 @@ export const StyledBubble = styled.div`
 
 export const ButtonList = styled.ul`
 	padding: 0;
-	margin: 0 0 30px;
+	margin: 0 0 ${({ theme }) => theme.spacing.large};
 	display: flex;
 	flex-wrap: wrap;
 	li {
@@ -153,6 +154,7 @@ export const ButtonSplit = styled.div`
 	border-radius: ${`calc(${big} / 2)`};
 	display: flex;
 	align-items: stretch;
+	width: 100%;
 	padding: 1px;
 	overflow: hidden;
 	${StyledButton} {

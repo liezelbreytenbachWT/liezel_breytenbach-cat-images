@@ -21,22 +21,37 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 500;
   }
   body {
-    padding: 30px 8vw;
+    padding: ${({ theme }) => theme.spacing.large} 8vw;
     color: ${({ theme }) => theme.colour.black};
-  }
-  
-  a {
-    color: inherit;
-    text-decoration: none;
   }
   
   * {
     box-sizing: border-box;
   }
   
+  h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+  }
+  h2, h3, h4, h5, h6 {
+    line-height: 1.5;
+  }
+  h1 {
+    line-height: 1.3;
+    margin-bottom: ${({ theme }) => theme.spacing.normal};
+  }
+  h1 + h2 {
+    margin-top: -${({ theme }) => theme.spacing.normal};
+    margin-bottom: ${({ theme }) => theme.spacing.normal};
+  }
+  
   p {
     color: ${({ theme }) => theme.colour.text.main};
     line-height: 1.6;
+  }
+  
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   button {
@@ -58,7 +73,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
     font-size: 24px;
-    display: inline-block;
+    display: inline-flex;
     line-height: 1;
     text-transform: none;
     letter-spacing: normal;

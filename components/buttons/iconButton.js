@@ -14,10 +14,8 @@ IconButton.propTypes = {
 	icon: PropTypes.string,
 	color: PropTypes.oneOf(["primary", "secondary"]),
 	onClick: PropTypes.func,
-	// variant: PropTypes.oneOf(["main", "outlined", "list"]),
 };
 
 IconButton.defaultProps = {
 	color: "primary",
-	// variant: "main",
 };

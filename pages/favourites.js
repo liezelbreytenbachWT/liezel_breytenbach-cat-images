@@ -1,5 +1,7 @@
 import { MongoClient } from "mongodb";
 import LinkButton from "../components/buttons/linkButton";
+import { ButtonSplit } from "../components/buttons/styles";
+import EmptyMessage from "../components/emptyMessage";
 import Gallery from "../components/gallery";
 
 export default function Breeds({ favourites }) {
@@ -10,15 +12,31 @@ export default function Breeds({ favourites }) {
 				Here are some favourites{" "}
 				<span className="material-icons-outlined">favorite</span>
 			</h1>
-			<Gallery
-				label="A favourite"
-				images={favourites}
-				favourites={favouriteIds}
-				onFavourite={(id) => removeFavourite(id)}
-			/>
-			<LinkButton path="/" variant="outlined">
-				Go Home
-			</LinkButton>
+			{favouriteIds.length > 0 ? (
+				<Gallery
+					label="A favourite"
+					images={favourites}
+					favourites={favouriteIds}
+					onFavourite={(id) => removeFavourite(id)}
+				/>
+			) : (
+				<EmptyMessage
+					title="No Favourites Yet"
+					message="Hit the like button on an image to add it to the favourites."
+				/>
+			)}
+			<ButtonSplit>
+				<LinkButton path="/breeds" variant="outlined">
+					Breeds
+				</LinkButton>
+				<LinkButton
+					path="/categories"
+					variant="outlined"
+					color="secondary"
+				>
+					Categories
+				</LinkButton>
+			</ButtonSplit>
 		</>
 	);
 }
